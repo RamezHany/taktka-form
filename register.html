@@ -272,15 +272,13 @@
               }
             })
             .then(function (data) {
+              window.location.href = "thanks.html";
               messageElement.textContent = "Data submitted successfully!";
               messageElement.style.backgroundColor = "";
               submitButton.disabled = false;
               submitButton.innerHTML = "Submit";
               document.getElementById("form").reset();
 
-              setTimeout(function () {
-                window.location.href = "thanks.html";
-              }, 1000);
             })
             .catch(function (error) {
               messageElement.textContent = "An error occurred. Please try again later.";
