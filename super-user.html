@@ -240,54 +240,66 @@
     }
 </script>
   <script>
+        // Fetch data from Google Apps Script
+        fetch('https://script.google.com/macros/s/AKfycbwxuE5TMofwBHqCmF36a_HRXDQhnEhfaXSnZrLLHuxUnPjDT1CGEKLskezrgZNSxMHL/exec')
+            .then(response => response.json())
+            .then(data => {
+                // Hide the splash screen
+                document.getElementById('splash-screen').style.display = 'none';
 
-    // Fetch data from Google Apps Script
-    fetch('https://script.google.com/macros/s/AKfycbwxuE5TMofwBHqCmF36a_HRXDQhnEhfaXSnZrLLHuxUnPjDT1CGEKLskezrgZNSxMHL/exec')
-      .then(response => response.json())
-      .then(data => {
-        // Display data in the table
-        const headers = data[0]; // Headers
-        const rows = data.slice(1); // Data rows
+                // Display data in the table
+                const headers = data[0]; // Headers
+                const rows = data.slice(1); // Data rows
 
-        // Add headers to the table
-        const headersRow = document.getElementById('table-headers');
-        headers.forEach((header, index) => {
-          const th = document.createElement('th');
-          th.textContent = header;
-          th.onclick = () => sortTable(index + 1); // Adjust index for sorting
-          headersRow.appendChild(th);
-          
-          // Add column options
-          const columnSelect = document.getElementById('column-select');
-          const option = document.createElement('option');
-          option.value = index + 2; // Set option value to column index + 1
-          option.textContent = header; // Option text
-          columnSelect.appendChild(option);
-        });
+                // Add headers to the table
+                const headersRow = document.getElementById('table-headers');
+                const columnSelect = document.getElementById('column-select'); // Get the select element
+                headers.forEach((header, index) => {
+                    // Check if the header is not "Name" before adding
+                    if (header !== "ID National Number") {
+                        const th = document.createElement('th');
+                        th.textContent = header;
+                        th.onclick = () => sortTable(index); // Add sorting functionality
+                        headersRow.appendChild(th);
 
-        // Add data to the table
-        const tableBody = document.getElementById('table-body');
-        rows.forEach((row, index) => {
-          const tr = document.createElement('tr');
-          
-          // Add sequence number
-          const tdIndex = document.createElement('td');
-          tdIndex.textContent = index + 1; // Add sequence number
-          tr.appendChild(tdIndex);
+                        // Create option for the column select
+                        const option = document.createElement('option');
+                        option.value = index + 2; // Use the index of the column
+                        option.textContent = header; // Use the header text
+                        columnSelect.appendChild(option); // Add the option to the select
+                    }
+                });
 
-          row.forEach(cell => {
-            const td = document.createElement('td');
-            td.textContent = cell;
-            tr.appendChild(td);
-          });
-          tableBody.appendChild(tr);
-        });
+                const tableBody = document.getElementById('table-body');
+                let totalRows = 0; // Count total rows
+                rows.forEach((row, index) => {
+                    const tr = document.createElement('tr');
 
-        // Update total row count
-        document.getElementById('row-count').textContent = `Total Rows: ${rows.length}`;
-      });
+                    // Add sequence number
+                    const tdIndex = document.createElement('td');
+                    tdIndex.textContent = index + 1; // Add sequence number
+                    tr.appendChild(tdIndex);
 
-    // Search function
+                    // Start from index 1 to skip name column (if name is at index 0)
+                    for (let i = 0; i < row.length; i++) {
+                        // Only add data cells that are not the "Name" column
+                        if (headers[i] !== "ID National Number") {
+                            const td = document.createElement('td');
+                            td.textContent = row[i]; // Add data cell
+                            tr.appendChild(td);
+                        }
+                    }
+
+                    tableBody.appendChild(tr);
+                    totalRows++; // Increment total rows count
+                });
+                
+                // Update total rows display
+                document.getElementById('row-count').textContent = `Total Rows: ${totalRows}`;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+           // Search function
     document.getElementById('search-input').addEventListener('input', function() {
       const query = this.value.toLowerCase();
       const selectedColumn = document.getElementById('column-select').value;
@@ -340,7 +352,6 @@ function exportToCSV() {
   link.click();
   document.body.removeChild(link);
 }
-
-  </script>
+    </script>
 </body>
 </html>
