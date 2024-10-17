@@ -68,7 +68,7 @@
       min-width: 100px; /* Minimum cell width */
     }
     th {
-      background-color: #4CAF50;
+      background-color: #939393;
       color: white;
       cursor: pointer; /* Change cursor on hover */
     }
@@ -79,7 +79,7 @@
     /* Button */
     button {
       padding: 10px 20px;
-      background-color: #4CAF50;
+      background-color: #939393;
       color: white;
       border: none;
       cursor: pointer;
@@ -97,7 +97,7 @@
     footer {
       text-align: center;
       padding: 10px;
-      background-color: #4CAF50;
+      background-color: #333333;
       color: white;
       font-family: Arial, sans-serif;
       position: fixed;
@@ -143,7 +143,7 @@
       border-radius: 0 20px 20px 0; /* Rounded corners */
     }
     #search-input:focus, #column-select:focus {
-      border-color: #4CAF50; /* Border color on focus */
+      border-color: #939393; /* Border color on focus */
       box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Add shadow */
     }
 
@@ -218,7 +218,7 @@
         // التحقق إذا كان المستخدم مسجلاً دخوله
         if (localStorage.getItem("loggedIn") !== "true") {
             // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن المستخدم مسجلاً دخوله
-            window.location.href = "login.html"; // استبدل login.html باسم ملف تسجيل الدخول
+            window.location.href = "admin-login.html"; // استبدل admin-login.html باسم ملف تسجيل الدخول
         } else {
             // عرض شاشة التحميل
             document.getElementById('splash-screen').classList.remove('hidden');
@@ -236,7 +236,7 @@
         // إزالة حالة تسجيل الدخول
         localStorage.removeItem("loggedIn");
         // إعادة التوجيه إلى صفحة تسجيل الدخول
-        window.location.href = "login.html"; // استبدل login.html باسم ملف تسجيل الدخول
+        window.location.href = "admin-login.html"; // استبدل admin-login.html باسم ملف تسجيل الدخول
     }
 </script>
   <script>
