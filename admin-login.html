@@ -47,6 +47,7 @@
     <script>
         const validUsername = "1"; 
         const validPassword = "1"; 
+        const sessionKey = "admin-session-12345"; // القيمة الفريدة للجلسة
 
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -54,9 +55,8 @@
             const password = document.getElementById("password").value;
 
             if (username === validUsername && password === validPassword) {
-             
-                localStorage.setItem("loggedIn", "true");
-               
+                // تخزين القيمة الفريدة
+                localStorage.setItem("ADMIN-LOGIN_SESSION", sessionKey);
                 window.location.href = "admin"; 
             } else {
                 alert("Incorrect username or password.");

@@ -214,9 +214,11 @@
     All rights reserved to IllustraV
   </footer>
 <script>
+    const sessionKey = "SUPER-USER-mmjmjmjm01201202"; // نفس القيمة الفريدة المستخدمة في صفحة تسجيل الدخول
+
     window.onload = function() {
         // التحقق إذا كان المستخدم مسجلاً دخوله
-        if (localStorage.getItem("loggedIn") !== "true") {
+        if (localStorage.getItem("SUPER-USER-SESSION") !== sessionKey) {
             // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن المستخدم مسجلاً دخوله
             window.location.href = "super-user-login"; // استبدل super-user-login باسم ملف تسجيل الدخول
         } else {
@@ -234,11 +236,12 @@
 
     function logout() {
         // إزالة حالة تسجيل الدخول
-        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("SUPER-USER-SESSION");
         // إعادة التوجيه إلى صفحة تسجيل الدخول
         window.location.href = "super-user-login"; // استبدل super-user-login باسم ملف تسجيل الدخول
     }
 </script>
+
   <script>
         // Fetch data from Google Apps Script
         fetch('https://script.google.com/macros/s/AKfycbwxuE5TMofwBHqCmF36a_HRXDQhnEhfaXSnZrLLHuxUnPjDT1CGEKLskezrgZNSxMHL/exec')

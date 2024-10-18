@@ -44,9 +44,10 @@
         <button type="submit">Submit</button>
     </form>
 
-    <script>
+  <script>
         const validUsername = "1"; 
         const validPassword = "1"; 
+        const sessionKey = "SUPER-USER-mmjmjmjm01201202"; // القيمة الفريدة للجلسة
 
         document.getElementById("loginForm").addEventListener("submit", function(event) {
             event.preventDefault();
@@ -54,10 +55,9 @@
             const password = document.getElementById("password").value;
 
             if (username === validUsername && password === validPassword) {
-             
-                localStorage.setItem("loggedIn", "true");
-               
-                window.location.href = "super-user"; 
+                // تخزين القيمة الفريدة
+                localStorage.setItem("SUPER-USER-SESSION", sessionKey);
+                window.location.href = "admin"; 
             } else {
                 alert("Incorrect username or password.");
             }

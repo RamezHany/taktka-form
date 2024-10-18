@@ -214,9 +214,11 @@
     All rights reserved to IllustraV
   </footer>
 <script>
+    const sessionKey = "admin-session-12345"; // نفس القيمة الفريدة المستخدمة في صفحة تسجيل الدخول
+
     window.onload = function() {
         // التحقق إذا كان المستخدم مسجلاً دخوله
-        if (localStorage.getItem("loggedIn") !== "true") {
+        if (localStorage.getItem("ADMIN-LOGIN_SESSION") !== sessionKey) {
             // إعادة التوجيه إلى صفحة تسجيل الدخول إذا لم يكن المستخدم مسجلاً دخوله
             window.location.href = "admin-login"; // استبدل admin-login باسم ملف تسجيل الدخول
         } else {
@@ -234,11 +236,12 @@
 
     function logout() {
         // إزالة حالة تسجيل الدخول
-        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("ADMIN-LOGIN_SESSION");
         // إعادة التوجيه إلى صفحة تسجيل الدخول
         window.location.href = "admin-login"; // استبدل admin-login باسم ملف تسجيل الدخول
     }
 </script>
+
   <script>
 
     // Fetch data from Google Apps Script
